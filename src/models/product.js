@@ -5,6 +5,7 @@ const schema = new mongoose.Schema({
   description: String,
   price: Number
 });
+
 const Product = mongoose.model('Product', schema);
 
 export default Product;

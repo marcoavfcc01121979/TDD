@@ -1,13 +1,15 @@
+import { Promise } from "mongoose";
+
 class ProductsController {
   constructor(Product) {
     this.Product = Product;
   }
 
   async get(req, res) {
-    try {
+    try{
       const products = await this.Product.find({});
       res.send(products);
-    } catch (err) {
+    } catch(err) {
       res.status(400).send(err.message);
     }
   }
@@ -24,12 +26,13 @@ class ProductsController {
       res.status(400).send(err.message);
     }
   }
+
   async create(req, res) {
     const product = new this.Product(req.body);
-    try {
+    try{
       await product.save();
       res.status(201).send(product);
-    } catch (err) {
+    }catch(err) {
       res.status(422).send(err.message);
     }
   }
@@ -38,7 +41,7 @@ class ProductsController {
     try {
       await this.Product.updateOne({ _id: req.params.id }, req.body);
       res.sendStatus(200);
-    } catch (err) {
+    } catch(err) {
       res.status(422).send(err.message);
     }
   }
